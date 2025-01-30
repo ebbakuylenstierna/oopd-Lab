@@ -32,7 +32,14 @@ public abstract class Car implements Movable {
     public void stopEngine() {currentSpeed = 0;}
 
     protected abstract double speedFactor();
+
+    /**
+     * Increases current speed by an amount. Speed must never be greater than enginePower.
+     */
     protected abstract void incrementSpeed(double amount);
+    /**
+     * Decreases current speed by an amount. Speed must never be less than zero.
+     */
     protected abstract void decrementSpeed(double amount);
 
 
@@ -65,10 +72,16 @@ public abstract class Car implements Movable {
 
     // TODO fix this method according to lab pm
     public void gas(double amount){
+        if (amount > 1 || amount < 0) {
+            throw new IllegalArgumentException("amount must be in the range 0-1");
+        }
         incrementSpeed(amount);
     }
     // TODO fix this method according to lab pm
     public void brake(double amount){
+        if (amount > 1 || amount < 0) {
+            throw new IllegalArgumentException("amount must be in the range 0-1");
+        }
         decrementSpeed(amount);
     }
 }

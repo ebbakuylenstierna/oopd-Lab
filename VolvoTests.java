@@ -109,4 +109,30 @@ public class VolvoTests {
     public void correctNrOfDoors() {
         assertEquals(4, volvo.getNrDoors());
     }
+
+    @Test
+    public void gasOnlyAcceptsAmountInInterval() {
+        assertThrows(IllegalArgumentException.class, () -> volvo.gas(2));
+        assertThrows(IllegalArgumentException.class, () -> volvo.gas(-1));
+    }
+
+    @Test
+    public void brakeOnlyAcceptsAmountInInterval() {
+        assertThrows(IllegalArgumentException.class, () -> volvo.brake(2));
+        assertThrows(IllegalArgumentException.class, () -> volvo.brake(-1));
+    }
+
+    @Test
+    public void tryDecrementSpeedOutsideInterval() {
+        volvo.brake(1);
+        assertEquals(0, volvo.currentSpeed);
+    }
+
+    @Test
+    public void tryIncrementSpeedOutsideInterval() {
+        for (int i = 0; i < 100; i++) {
+            volvo.gas(1);
+        }
+        assertFalse(volvo.currentSpeed > volvo.getEnginePower());
+    }
 }
