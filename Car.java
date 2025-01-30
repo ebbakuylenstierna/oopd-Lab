@@ -42,25 +42,25 @@ public abstract class Car implements Movable {
                 xPosition += currentSpeed;
                 break;
             case 1:
-                yPosition += currentSpeed;
+                yPosition -= currentSpeed;
                 break;
             case 2:
                 xPosition -= currentSpeed;
                 break;
             case 3:
-                yPosition -= currentSpeed;
+                yPosition += currentSpeed;
                 break;
         }
     }
 
     public void turnLeft() {
-        rotation --;
-        rotation %= 4;
+        rotation--;
+        rotation = (byte)Math.floorMod(rotation, 4);
     }
 
     public void turnRight() {
         rotation++;
-        rotation %= 4;
+        rotation = (byte)Math.floorMod(rotation, 4);
     }
 
     // TODO fix this method according to lab pm
