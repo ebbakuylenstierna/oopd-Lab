@@ -16,13 +16,13 @@ public class VolvoTests {
     @Test
     public void turnsRight() {
         volvo.turnRight();
-        assertEquals(1, volvo.rotation);
+        assertEquals(1, volvo.getRotation());
     }
 
     @Test
     public void turnsLeft() {
         volvo.turnLeft();
-        assertEquals(3, volvo.rotation);
+        assertEquals(3, volvo.getRotation());
     }
 
     @Test
@@ -31,7 +31,7 @@ public class VolvoTests {
         volvo.turnLeft();
         volvo.turnRight();
         volvo.turnRight();
-        assertEquals(0, volvo.rotation);
+        assertEquals(0, volvo.getRotation());
     }
 
     @Test
@@ -65,7 +65,7 @@ public class VolvoTests {
     public void moveForward() {
         volvo.gas(1);
         volvo.move();
-        assertTrue(volvo.xPosition > 0, "Car has not moved forward");
+        assertTrue(volvo.getX() > 0, "Car has not moved forward");
     }
 
 
@@ -74,7 +74,7 @@ public class VolvoTests {
         volvo.gas(1);
         volvo.turnRight();
         volvo.move();
-        assertTrue(volvo.yPosition < 0, "Car has not moved right");
+        assertTrue(volvo.getY() < 0, "Car has not moved right");
     }
 
     @Test
@@ -82,7 +82,7 @@ public class VolvoTests {
         volvo.gas(1);
         volvo.turnLeft();
         volvo.move();
-        assertTrue(volvo.yPosition > 0, "Car has not moved left");
+        assertTrue(volvo.getY() > 0, "Car has not moved left");
     }
 
     @Test
@@ -91,13 +91,19 @@ public class VolvoTests {
         volvo.turnRight();
         volvo.turnRight();
         volvo.move();
-        assertTrue(volvo.xPosition < 0, "Car has not moved back");
+        assertTrue(volvo.getX() < 0, "Car has not moved back");
     }
+
 
     @Test
     public void changeColor() {
         volvo.setColor(Color.RED);
         assertEquals(Color.RED, volvo.getColor());
+    }
+
+    @Test
+    public void correctModelName() {
+        assertEquals("Volvo240", volvo.getModelName());
     }
 
     @Test
