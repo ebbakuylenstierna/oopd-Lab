@@ -70,14 +70,13 @@ public abstract class Car implements Movable {
         rotation = (byte)Math.floorMod(rotation, 4);
     }
 
-    // TODO fix this method according to lab pm
     public void gas(double amount){
         if (amount > 1 || amount < 0) {
             throw new IllegalArgumentException("amount must be in the range 0-1");
         }
         incrementSpeed(amount);
     }
-    // TODO fix this method according to lab pm
+
     public void brake(double amount){
         if (amount > 1 || amount < 0) {
             throw new IllegalArgumentException("amount must be in the range 0-1");
