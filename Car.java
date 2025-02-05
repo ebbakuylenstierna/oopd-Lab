@@ -2,26 +2,42 @@ import java.awt.*;
 
 public abstract class Car implements Movable {
 
-    protected double xPosition = 0;
-    protected double yPosition = 0;
-    protected Rotation rotation = Rotation.FORWARD;
+    private double xPosition = 0;
+    private double yPosition = 0;
+    private Rotation rotation = Rotation.FORWARD;
 
-    protected int nrDoors; // Number of doors on the car
+    private final int nrDoors; // Number of doors on the car
 
-    protected double enginePower; // Engine power of the car
+    private final double enginePower; // Engine power of the car
 
     protected double currentSpeed; // The current speed of the car
 
-    protected Color color; // Color of the car
+    private Color color; // Color of the car
 
-    protected String modelName; // The car model name
+    private final String modelName; // The car model name
 
+    public Car(int nrDoors, Color color, double enginePower, String modelName) {
+        this.nrDoors = nrDoors;
+        this.color = color;
+        this.enginePower = enginePower;
+        this.modelName = modelName;
+
+        stopEngine();
+    }
+
+    public double getX() {return xPosition;}
+
+    public double getY() {return yPosition;}
+
+    public Rotation getRotation() {return rotation;}
 
     public int getNrDoors() {return nrDoors;}
 
     public double getEnginePower() {return enginePower;}
 
     public double getCurrentSpeed() {return currentSpeed;}
+
+    public String getModelName() {return modelName;}
 
     public Color getColor() {return color;}
 
@@ -30,6 +46,7 @@ public abstract class Car implements Movable {
     public void startEngine() {currentSpeed = 0.1;}
 
     public void stopEngine() {currentSpeed = 0;}
+
 
     protected abstract double speedFactor();
 

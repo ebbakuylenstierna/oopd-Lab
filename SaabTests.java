@@ -16,13 +16,13 @@ public class SaabTests {
     @Test
     public void turnsRight() {
         saab.turnRight();
-        assertEquals(Rotation.RIGHT, saab.rotation);
+        assertEquals(Rotation.RIGHT, saab.getRotation());
     }
 
     @Test
     public void turnsLeft() {
         saab.turnLeft();
-        assertEquals(Rotation.LEFT, saab.rotation);
+        assertEquals(Rotation.LEFT, saab.getRotation());
     }
 
     @Test
@@ -31,7 +31,7 @@ public class SaabTests {
         saab.turnLeft();
         saab.turnRight();
         saab.turnRight();
-        assertEquals(Rotation.FORWARD, saab.rotation);
+        assertEquals(Rotation.FORWARD, saab.getRotation());
     }
 
     @Test
@@ -65,7 +65,7 @@ public class SaabTests {
     public void moveForward() {
         saab.gas(1);
         saab.move();
-        assertTrue(saab.xPosition > 0, "Car has not moved forward");
+        assertTrue(saab.getX() > 0, "Car has not moved forward");
     }
 
 
@@ -74,7 +74,7 @@ public class SaabTests {
         saab.gas(1);
         saab.turnRight();
         saab.move();
-        assertTrue(saab.yPosition < 0, "Car has not moved right");
+        assertTrue(saab.getY() < 0, "Car has not moved right");
     }
 
     @Test
@@ -82,7 +82,7 @@ public class SaabTests {
         saab.gas(1);
         saab.turnLeft();
         saab.move();
-        assertTrue(saab.yPosition > 0, "Car has not moved left");
+        assertTrue(saab.getY() > 0, "Car has not moved left");
     }
 
     @Test
@@ -91,7 +91,7 @@ public class SaabTests {
         saab.turnRight();
         saab.turnRight();
         saab.move();
-        assertTrue(saab.xPosition < 0, "Car has not moved back");
+        assertTrue(saab.getX() < 0, "Car has not moved back");
     }
 
     @Test
@@ -101,10 +101,15 @@ public class SaabTests {
     }
 
     @Test
+    public void correctModelName() {
+        assertEquals("Saab95", saab.getModelName());
+    }
+
+    @Test
     public void turboOnOff() {
         saab.setTurboOn();
         saab.setTurboOff();
-        assertFalse(saab.turboOn);
+        assertFalse(saab.isTurboOn());
     }
 
     @Test
