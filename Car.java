@@ -4,7 +4,7 @@ public abstract class Car implements Movable {
 
     protected double xPosition = 0;
     protected double yPosition = 0;
-    protected byte rotation = 0;
+    protected Rotation rotation = Rotation.FORWARD;
 
     protected int nrDoors; // Number of doors on the car
 
@@ -45,39 +45,36 @@ public abstract class Car implements Movable {
 
     public void move() {
         switch (rotation) {
-            case 0:
+            case FORWARD:
                 xPosition += currentSpeed;
                 break;
-            case 1:
+            case RIGHT:
                 yPosition -= currentSpeed;
                 break;
-            case 2:
+            case BACK:
                 xPosition -= currentSpeed;
                 break;
-            case 3:
+            case LEFT:
                 yPosition += currentSpeed;
                 break;
         }
     }
 
     public void turnLeft() {
-        rotation--;
-        rotation = (byte)Math.floorMod(rotation, 4);
+        rotation = rotation.turnLeft();
     }
 
     public void turnRight() {
-        rotation++;
-        rotation = (byte)Math.floorMod(rotation, 4);
+        rotation = rotation.turnRight();
     }
 
-    // TODO fix this method according to lab pm
     public void gas(double amount){
         if (amount > 1 || amount < 0) {
             throw new IllegalArgumentException("amount must be in the range 0-1");
         }
         incrementSpeed(amount);
     }
-    // TODO fix this method according to lab pm
+
     public void brake(double amount){
         if (amount > 1 || amount < 0) {
             throw new IllegalArgumentException("amount must be in the range 0-1");

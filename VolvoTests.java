@@ -16,13 +16,13 @@ public class VolvoTests {
     @Test
     public void turnsRight() {
         volvo.turnRight();
-        assertEquals(1, volvo.rotation);
+        assertEquals(Rotation.RIGHT, volvo.rotation);
     }
 
     @Test
     public void turnsLeft() {
         volvo.turnLeft();
-        assertEquals(3, volvo.rotation);
+        assertEquals(Rotation.LEFT, volvo.rotation);
     }
 
     @Test
@@ -31,7 +31,7 @@ public class VolvoTests {
         volvo.turnLeft();
         volvo.turnRight();
         volvo.turnRight();
-        assertEquals(0, volvo.rotation);
+        assertEquals(Rotation.FORWARD, volvo.rotation);
     }
 
     @Test

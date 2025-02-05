@@ -16,13 +16,13 @@ public class SaabTests {
     @Test
     public void turnsRight() {
         saab.turnRight();
-        assertEquals(1, saab.rotation);
+        assertEquals(Rotation.RIGHT, saab.rotation);
     }
 
     @Test
     public void turnsLeft() {
         saab.turnLeft();
-        assertEquals(3, saab.rotation);
+        assertEquals(Rotation.LEFT, saab.rotation);
     }
 
     @Test
@@ -31,7 +31,7 @@ public class SaabTests {
         saab.turnLeft();
         saab.turnRight();
         saab.turnRight();
-        assertEquals(0, saab.rotation);
+        assertEquals(Rotation.FORWARD, saab.rotation);
     }
 
     @Test
