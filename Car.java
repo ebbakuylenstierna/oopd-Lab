@@ -47,6 +47,7 @@ public abstract class Car implements Movable {
 
     public void stopEngine() {currentSpeed = 0;}
 
+    public boolean isStandingStill() {return currentSpeed == 0;}
 
     protected abstract double speedFactor();
 
