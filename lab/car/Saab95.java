@@ -1,11 +1,13 @@
+package lab.car;
+
 import java.awt.*;
 
-public class Saab95 extends Car{
+public class Saab95 extends Car implements SmallCar {
 
     private boolean turboOn;
 
     public Saab95(){
-        super(2, Color.red, 125, "Saab95");
+        super(2, Color.red, 125, "lab.car.Saab95");
 	    turboOn = false;
     }
 
@@ -22,13 +24,5 @@ public class Saab95 extends Car{
         double turbo = 1;
         if(turboOn) turbo = 1.3;
         return getEnginePower() * 0.01 * turbo;
-    }
-
-    protected void incrementSpeed(double amount){
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower());
-    }
-
-    protected void decrementSpeed(double amount){
-        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
     }
 }

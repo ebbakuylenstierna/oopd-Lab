@@ -1,3 +1,5 @@
+package lab;
+
 public enum Rotation {
     FORWARD(0),
     RIGHT(1),

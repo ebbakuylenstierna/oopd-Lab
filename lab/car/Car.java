@@ -1,20 +1,24 @@
+package lab.car;
+
+import lab.Rotation;
+
 import java.awt.*;
 
-public abstract class Car implements Movable {
+public abstract class Car implements ICar {
 
     private double xPosition = 0;
     private double yPosition = 0;
     private Rotation rotation = Rotation.FORWARD;
 
-    private final int nrDoors; // Number of doors on the car
+    private final int nrDoors; // Number of doors on the lab.car
 
-    private final double enginePower; // Engine power of the car
+    private final double enginePower; // Engine power of the lab.car
 
-    protected double currentSpeed; // The current speed of the car
+    private double currentSpeed; // The current speed of the lab.car
 
-    private Color color; // Color of the car
+    private Color color; // Color of the lab.car
 
-    private final String modelName; // The car model name
+    private final String modelName; // The lab.car model name
 
     public Car(int nrDoors, Color color, double enginePower, String modelName) {
         this.nrDoors = nrDoors;
@@ -25,28 +29,41 @@ public abstract class Car implements Movable {
         stopEngine();
     }
 
+    @Override
     public double getX() {return xPosition;}
 
+    @Override
     public double getY() {return yPosition;}
 
+    @Override
     public Rotation getRotation() {return rotation;}
 
+    @Override
     public int getNrDoors() {return nrDoors;}
 
+    @Override
     public double getEnginePower() {return enginePower;}
 
+    @Override
     public double getCurrentSpeed() {return currentSpeed;}
 
+    @Override
     public String getModelName() {return modelName;}
 
+    @Override
     public Color getColor() {return color;}
 
-    public void setColor(Color clr) {color = clr;}
+    @Override
+    public void setColor(Color color) {
+        this.color = color;}
 
+    @Override
     public void startEngine() {currentSpeed = 0.1;}
 
+    @Override
     public void stopEngine() {currentSpeed = 0;}
 
+    @Override
     public boolean isStandingStill() {return currentSpeed == 0;}
 
     protected abstract double speedFactor();
@@ -54,25 +71,29 @@ public abstract class Car implements Movable {
     /**
      * Increases current speed by an amount. Speed must never be greater than enginePower.
      */
-    protected abstract void incrementSpeed(double amount);
+    protected void incrementSpeed(double amount) {
+        currentSpeed = Math.min(currentSpeed + speedFactor() * amount, enginePower);
+    }
     /**
      * Decreases current speed by an amount. Speed must never be less than zero.
      */
-    protected abstract void decrementSpeed(double amount);
+    protected void decrementSpeed(double amount) {
+        currentSpeed = Math.max(currentSpeed - speedFactor() * amount, 0);
+    }
 
 
     public void move() {
         switch (rotation) {
-            case FORWARD:
+            case Rotation.FORWARD:
                 xPosition += currentSpeed;
                 break;
-            case RIGHT:
+            case Rotation.RIGHT:
                 yPosition -= currentSpeed;
                 break;
-            case BACK:
+            case Rotation.BACK:
                 xPosition -= currentSpeed;
                 break;
-            case LEFT:
+            case Rotation.LEFT:
                 yPosition += currentSpeed;
                 break;
         }
@@ -86,6 +107,7 @@ public abstract class Car implements Movable {
         rotation = rotation.turnRight();
     }
 
+    @Override
     public void gas(double amount){
         if (amount > 1 || amount < 0) {
             throw new IllegalArgumentException("amount must be in the range 0-1");
@@ -93,6 +115,7 @@ public abstract class Car implements Movable {
         incrementSpeed(amount);
     }
 
+    @Override
     public void brake(double amount){
         if (amount > 1 || amount < 0) {
             throw new IllegalArgumentException("amount must be in the range 0-1");

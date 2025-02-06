@@ -1,3 +1,8 @@
+package lab.test;
+
+import lab.Rotation;
+import lab.car.Saab95;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,13 +21,13 @@ public class SaabTests {
     @Test
     public void turnsRight() {
         saab.turnRight();
-        assertEquals(Rotation.RIGHT, saab.getRotation());
+        Assertions.assertEquals(Rotation.RIGHT, saab.getRotation());
     }
 
     @Test
     public void turnsLeft() {
         saab.turnLeft();
-        assertEquals(Rotation.LEFT, saab.getRotation());
+        Assertions.assertEquals(Rotation.LEFT, saab.getRotation());
     }
 
     @Test
@@ -31,41 +36,41 @@ public class SaabTests {
         saab.turnLeft();
         saab.turnRight();
         saab.turnRight();
-        assertEquals(Rotation.FORWARD, saab.getRotation());
+        Assertions.assertEquals(Rotation.FORWARD, saab.getRotation());
     }
 
     @Test
     public void incrementsSpeed() {
         saab.gas(1);
-        assertTrue(saab.currentSpeed > 0, "Car has not sped up");
+        assertTrue(saab.getCurrentSpeed() > 0, "lab.car.Car has not sped up");
     }
 
     @Test
     public void decrementsSpeed() {
         saab.gas(1);
-        double speed = saab.currentSpeed;
+        double speed = saab.getCurrentSpeed();
         saab.brake(1);
-        assertTrue(saab.currentSpeed < speed, "Car has not slowed down");
+        assertTrue(saab.getCurrentSpeed() < speed, "lab.car.Car has not slowed down");
     }
 
     @Test
     public void startsEngine() {
         saab.startEngine();
-        assertTrue(saab.currentSpeed > 0, "Car has not started");
+        assertTrue(saab.getCurrentSpeed() > 0, "lab.car.Car has not started");
     }
 
     @Test
     public void stopsEngine() {
         saab.startEngine();
         saab.stopEngine();
-        assertEquals(0, saab.currentSpeed);
+        assertEquals(0, saab.getCurrentSpeed());
     }
 
     @Test
     public void moveForward() {
         saab.gas(1);
         saab.move();
-        assertTrue(saab.getX() > 0, "Car has not moved forward");
+        assertTrue(saab.getX() > 0, "lab.car.Car has not moved forward");
     }
 
 
@@ -74,7 +79,7 @@ public class SaabTests {
         saab.gas(1);
         saab.turnRight();
         saab.move();
-        assertTrue(saab.getY() < 0, "Car has not moved right");
+        assertTrue(saab.getY() < 0, "lab.car.Car has not moved right");
     }
 
     @Test
@@ -82,7 +87,7 @@ public class SaabTests {
         saab.gas(1);
         saab.turnLeft();
         saab.move();
-        assertTrue(saab.getY() > 0, "Car has not moved left");
+        assertTrue(saab.getY() > 0, "lab.car.Car has not moved left");
     }
 
     @Test
@@ -91,7 +96,7 @@ public class SaabTests {
         saab.turnRight();
         saab.turnRight();
         saab.move();
-        assertTrue(saab.getX() < 0, "Car has not moved back");
+        assertTrue(saab.getX() < 0, "lab.car.Car has not moved back");
     }
 
     @Test
@@ -102,7 +107,7 @@ public class SaabTests {
 
     @Test
     public void correctModelName() {
-        assertEquals("Saab95", saab.getModelName());
+        assertEquals("lab.car.Saab95", saab.getModelName());
     }
 
     @Test
@@ -115,12 +120,12 @@ public class SaabTests {
     @Test
     public void speedFasterWithTurbo() {
         saab.gas(1);
-        double speedWithoutTurbo = saab.currentSpeed;
+        double speedWithoutTurbo = saab.getCurrentSpeed();
         saab.stopEngine();
 
         saab.setTurboOn();
         saab.gas(1);
-        double speedWithTurbo = saab.currentSpeed;
+        double speedWithTurbo = saab.getCurrentSpeed();
 
         assertTrue(speedWithTurbo > speedWithoutTurbo, "Turbo is not faster than no turbo");
     }

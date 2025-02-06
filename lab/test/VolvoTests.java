@@ -1,3 +1,8 @@
+package lab.test;
+
+import lab.Rotation;
+import lab.car.Volvo240;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,13 +21,13 @@ public class VolvoTests {
     @Test
     public void turnsRight() {
         volvo.turnRight();
-        assertEquals(Rotation.RIGHT, volvo.getRotation());
+        Assertions.assertEquals(Rotation.RIGHT, volvo.getRotation());
     }
 
     @Test
     public void turnsLeft() {
         volvo.turnLeft();
-        assertEquals(Rotation.LEFT, volvo.getRotation());
+        Assertions.assertEquals(Rotation.LEFT, volvo.getRotation());
     }
 
     @Test
@@ -31,41 +36,41 @@ public class VolvoTests {
         volvo.turnLeft();
         volvo.turnRight();
         volvo.turnRight();
-        assertEquals(Rotation.FORWARD, volvo.getRotation());
+        Assertions.assertEquals(Rotation.FORWARD, volvo.getRotation());
     }
 
     @Test
     public void incrementsSpeed() {
         volvo.gas(1);
-        assertTrue(volvo.currentSpeed > 0, "Car has not sped up");
+        assertTrue(volvo.getCurrentSpeed() > 0, "lab.car.Car has not sped up");
     }
 
     @Test
     public void decrementsSpeed() {
         volvo.gas(1);
-        double speed = volvo.currentSpeed;
+        double speed = volvo.getCurrentSpeed();
         volvo.brake(1);
-        assertTrue(volvo.currentSpeed < speed, "Car has not slowed down");
+        assertTrue(volvo.getCurrentSpeed() < speed, "lab.car.Car has not slowed down");
     }
 
     @Test
     public void startsEngine() {
         volvo.startEngine();
-        assertTrue(volvo.currentSpeed > 0, "Car has not started");
+        assertTrue(volvo.getCurrentSpeed() > 0, "lab.car.Car has not started");
     }
 
     @Test
     public void stopsEngine() {
         volvo.startEngine();
         volvo.stopEngine();
-        assertEquals(0, volvo.currentSpeed);
+        assertEquals(0, volvo.getCurrentSpeed());
     }
 
     @Test
     public void moveForward() {
         volvo.gas(1);
         volvo.move();
-        assertTrue(volvo.getX() > 0, "Car has not moved forward");
+        assertTrue(volvo.getX() > 0, "lab.car.Car has not moved forward");
     }
 
 
@@ -74,7 +79,7 @@ public class VolvoTests {
         volvo.gas(1);
         volvo.turnRight();
         volvo.move();
-        assertTrue(volvo.getY() < 0, "Car has not moved right");
+        assertTrue(volvo.getY() < 0, "lab.car.Car has not moved right");
     }
 
     @Test
@@ -82,7 +87,7 @@ public class VolvoTests {
         volvo.gas(1);
         volvo.turnLeft();
         volvo.move();
-        assertTrue(volvo.getY() > 0, "Car has not moved left");
+        assertTrue(volvo.getY() > 0, "lab.car.Car has not moved left");
     }
 
     @Test
@@ -91,7 +96,7 @@ public class VolvoTests {
         volvo.turnRight();
         volvo.turnRight();
         volvo.move();
-        assertTrue(volvo.getX() < 0, "Car has not moved back");
+        assertTrue(volvo.getX() < 0, "lab.car.Car has not moved back");
     }
 
 
@@ -103,7 +108,7 @@ public class VolvoTests {
 
     @Test
     public void correctModelName() {
-        assertEquals("Volvo240", volvo.getModelName());
+        assertEquals("lab.car.Volvo240", volvo.getModelName());
     }
 
     @Test
@@ -131,7 +136,7 @@ public class VolvoTests {
     @Test
     public void tryDecrementSpeedOutsideInterval() {
         volvo.brake(1);
-        assertEquals(0, volvo.currentSpeed);
+        assertEquals(0, volvo.getCurrentSpeed());
     }
 
     @Test
@@ -139,6 +144,6 @@ public class VolvoTests {
         for (int i = 0; i < 100; i++) {
             volvo.gas(1);
         }
-        assertFalse(volvo.currentSpeed > volvo.getEnginePower());
+        assertFalse(volvo.getCurrentSpeed() > volvo.getEnginePower());
     }
 }

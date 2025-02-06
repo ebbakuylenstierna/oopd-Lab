@@ -1,16 +1,16 @@
-public class CarTransporter extends CarWithRamp {
+package lab.ramp;
+
+public class BooleanRamp implements Ramp {
     private boolean isRampUp = true;
 
     @Override
     public void raiseRamp() {
-        if (isStandingStill())
-            isRampUp = true;
+        isRampUp = true;
     }
 
     @Override
     public void lowerRamp() {
-        if (isStandingStill())
-            isRampUp = false;
+        isRampUp = false;
     }
 
     @Override
