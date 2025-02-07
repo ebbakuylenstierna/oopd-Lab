@@ -1,4 +1,4 @@
-package lab.test;
+package test;
 
 import lab.Rotation;
 import lab.car.Saab95;
