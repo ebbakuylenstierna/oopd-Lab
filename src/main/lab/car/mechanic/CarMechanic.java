@@ -1,5 +1,6 @@
 package lab.car.mechanic;
 
+import lab.Position;
 import lab.Positioned;
 import lab.Rotation;
 import lab.car.ICar;
@@ -9,16 +10,12 @@ import lab.car.holder.FifoHolder;
 import java.util.List;
 
 public class CarMechanic<T extends ICar> implements CarHolder<T>, Positioned {
-    private final double x;
-    private final double y;
-    private final Rotation rotation;
+    private final Position position;
     private final CarHolder<T> holder;
 
-    public CarMechanic(double x, double y, Rotation rotation, int size) {
+    public CarMechanic(Position position, int size) {
         holder = new FifoHolder<>(size);
-        this.x = x;
-        this.y = y;
-        this.rotation = rotation;
+        this.position = position.copy();
     }
 
     @Override
@@ -53,16 +50,20 @@ public class CarMechanic<T extends ICar> implements CarHolder<T>, Positioned {
 
     @Override
     public double getX() {
-        return x;
+        return position.getX();
     }
 
     @Override
     public double getY() {
-        return y;
+        return position.getY();
     }
 
     @Override
     public Rotation getRotation() {
-        return rotation;
+        return position.getRotation();
+    }
+
+    public Position getPosition() {
+        return position.copy();
     }
 }

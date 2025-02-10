@@ -13,7 +13,7 @@ public class VolvoCarTransporter extends CarWithRamp<BooleanRamp> implements Car
     private final CarHolder<TransportableCar> holder;
 
     public VolvoCarTransporter() {
-        super(2, Color.WHITE, 250, "lab.car.VolvoCarTransporter", new BooleanRamp());
+        super(2, Color.WHITE, 250, "VolvoCarTransporter", new BooleanRamp());
         holder = new FiloHolder<>(5);
     }
 
@@ -35,6 +35,7 @@ public class VolvoCarTransporter extends CarWithRamp<BooleanRamp> implements Car
         if (!isRampLowered())
             throw new IllegalStateException("Cannot remove car while ramp is raised");
         TransportableCar car = holder.removeCar();
+        car.setPosition(getPosition().offsetForward(-1));
         car.endTransport();
         return car;
     }

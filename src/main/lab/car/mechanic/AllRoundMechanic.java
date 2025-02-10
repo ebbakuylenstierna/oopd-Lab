@@ -1,10 +1,10 @@
 package lab.car.mechanic;
 
-import lab.Rotation;
+import lab.Position;
 import lab.car.ICar;
 
 public class AllRoundMechanic extends CarMechanic<ICar> {
-    public AllRoundMechanic(double x, double y, Rotation rotation) {
-        super(x, y, rotation, 2);
+    public AllRoundMechanic(Position position) {
+        super(position, 2);
     }
 }
