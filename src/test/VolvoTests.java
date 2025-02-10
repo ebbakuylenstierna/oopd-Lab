@@ -1,5 +1,3 @@
-package test;
-
 import lab.Rotation;
 import lab.car.Volvo240;
 import org.junit.jupiter.api.Assertions;
