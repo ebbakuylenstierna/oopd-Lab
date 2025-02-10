@@ -4,6 +4,7 @@ import lab.car.ICar;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.List;
 
 public abstract class DequeHolder<T extends ICar> implements CarHolder<T> {
     protected final Deque<T> cars;
@@ -17,5 +18,20 @@ public abstract class DequeHolder<T extends ICar> implements CarHolder<T> {
     @Override
     public int size() {
         return size;
+    }
+
+    @Override
+    public boolean isFull() {
+        return cars.size() >= size;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return cars.isEmpty();
+    }
+
+    @Override
+    public List<T> getCars() {
+        return List.copyOf(cars);
     }
 }

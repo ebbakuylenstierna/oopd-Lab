@@ -29,11 +29,24 @@ public abstract class Car implements ICar {
         stopEngine();
     }
 
+    protected void setX(double x) {
+        this.xPosition = x;
+    }
+
     @Override
     public double getX() {return xPosition;}
 
+
+    protected void setY(double y) {
+        this.yPosition = y;
+    }
+
     @Override
     public double getY() {return yPosition;}
+
+    protected void setRotation(Rotation rotation) {
+        this.rotation = rotation;
+    }
 
     @Override
     public Rotation getRotation() {return rotation;}

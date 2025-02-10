@@ -3,12 +3,14 @@ package lab.car;
 import lab.car.holder.CarHolder;
 import lab.car.holder.FiloHolder;
 import lab.ramp.BooleanRamp;
+import lab.transport.Transporter;
 
 import java.awt.*;
+import java.util.List;
 
-public class VolvoCarTransporter extends CarWithRamp<BooleanRamp> implements CarHolder<SmallCar> {
+public class VolvoCarTransporter extends CarWithRamp<BooleanRamp> implements CarHolder<TransportableCar>, Transporter<TransportableCar> {
 
-    private final CarHolder<SmallCar> holder;
+    private final CarHolder<TransportableCar> holder;
 
     public VolvoCarTransporter() {
         super(2, Color.WHITE, 250, "lab.car.VolvoCarTransporter", new BooleanRamp());
@@ -21,17 +23,25 @@ public class VolvoCarTransporter extends CarWithRamp<BooleanRamp> implements Car
     }
 
     @Override
-    public void addCar(SmallCar car) {
+    public void addCar(TransportableCar car) {
         if (!isRampLowered())
             throw new IllegalStateException("Cannot add car while ramp is raised");
+        car.startTransport(this);
         holder.addCar(car);
     }
 
     @Override
-    public SmallCar removeCar() {
+    public TransportableCar removeCar() {
         if (!isRampLowered())
             throw new IllegalStateException("Cannot remove car while ramp is raised");
-        return holder.removeCar();
+        TransportableCar car = holder.removeCar();
+        car.endTransport();
+        return car;
+    }
+
+    @Override
+    public List<TransportableCar> getCars() {
+        return holder.getCars();
     }
 
     @Override
@@ -40,10 +50,32 @@ public class VolvoCarTransporter extends CarWithRamp<BooleanRamp> implements Car
     }
 
     @Override
+    public boolean isFull() {
+        return holder.isFull();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return holder.isEmpty();
+    }
+
+    @Override
     public void move() {
         super.move();
 
         // Update held cars' positions
-        // TODO
+        updateTransportedPositions();
+    }
+
+    @Override
+    public void transport(TransportableCar transportable) {
+        addCar(transportable);
+    }
+
+    @Override
+    public void updateTransportedPositions() {
+        for (TransportableCar car : getCars()) {
+            car.moveToTransporter();
+        }
     }
 }

@@ -2,7 +2,7 @@ package lab.car;
 
 import java.awt.*;
 
-public class Volvo240 extends Car implements SmallCar {
+public class Volvo240 extends TransportableCar {
 
     protected double trimFactor = 1.25;
     
