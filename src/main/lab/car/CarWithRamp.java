@@ -20,6 +20,13 @@ public abstract class CarWithRamp<T extends Ramp> extends Car implements Ramp {
     }
 
     @Override
+    public void startEngine() {
+        if (isRampLowered())
+            throw new IllegalStateException("Cannot drive while ramp is lowered");
+        super.startEngine();
+    }
+
+    @Override
     public void raiseRamp() {
         if (!isStandingStill())
             throw new IllegalStateException("Cannot raise ramp while moving");

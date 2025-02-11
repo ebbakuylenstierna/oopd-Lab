@@ -20,6 +20,9 @@ public class CarMechanic<T extends ICar> implements CarHolder<T>, Positioned {
 
     @Override
     public void addCar(T car) {
+        if (distanceTo(car) < 5)
+            throw new IllegalStateException("Car is too far away");
+
         holder.addCar(car);
     }
 

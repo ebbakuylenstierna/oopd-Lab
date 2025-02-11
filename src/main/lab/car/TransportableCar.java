@@ -47,4 +47,35 @@ public abstract class TransportableCar extends Car implements Transportable<Tran
 
         setPosition(transporter.getPosition());
     }
+
+    @Override
+    public void gas(double amount) {
+        if (isBeingTransported())
+            throw new IllegalStateException("Cannot gas while being transported");
+
+        super.gas(amount);
+    }
+
+    @Override
+    public void startEngine() {
+        if (isBeingTransported())
+            throw new IllegalStateException("Cannot start engine while being transported");
+
+        super.startEngine();
+    }
+
+    @Override
+    public void turnLeft() {
+        if (isBeingTransported())
+            throw new IllegalStateException("Cannot turn while being transported");
+
+        super.turnLeft();
+    }
+
+    @Override
+    public void turnRight() {
+        if (isBeingTransported())
+            throw new IllegalStateException("Cannot turn while being transported");
+        super.turnRight();
+    }
 }
