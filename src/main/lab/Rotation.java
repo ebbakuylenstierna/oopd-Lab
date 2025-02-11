@@ -1,10 +1,10 @@
 package lab;
 
 public enum Rotation {
-    FORWARD(0),
-    RIGHT(1),
-    BACK(2),
-    LEFT(3);
+    NORTH(0),
+    EAST(1),
+    SOUTH(2),
+    WEST(3);
 
     public final int value;
     Rotation(int value) {
@@ -17,5 +17,9 @@ public enum Rotation {
 
     public Rotation turnLeft() {
         return Rotation.values()[Math.floorMod(value - 1, 4)];
+    }
+
+    public Rotation flip() {
+        return Rotation.values()[Math.floorMod(value + 2, 4)];
     }
 }

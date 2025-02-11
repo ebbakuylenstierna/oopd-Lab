@@ -18,7 +18,7 @@ public class Position implements Positioned {
     }
 
     public Position() {
-        this(0, 0, Rotation.FORWARD);
+        this(0, 0, Rotation.EAST);
     }
 
     public static Position copyOf(Position position) {
@@ -72,19 +72,19 @@ public class Position implements Positioned {
 
     public Position offsetForward(double offset) {
         return switch (rotation) {
-            case Rotation.FORWARD -> offsetX(offset);
-            case Rotation.RIGHT -> offsetY(-offset);
-            case Rotation.BACK -> offsetX(-offset);
-            case Rotation.LEFT -> offsetY(offset);
+            case Rotation.EAST -> offsetX(offset);
+            case Rotation.SOUTH -> offsetY(-offset);
+            case Rotation.WEST -> offsetX(-offset);
+            case Rotation.NORTH -> offsetY(offset);
         };
     }
 
     public Position offsetRight(double offset) {
         return switch (rotation) {
-            case Rotation.FORWARD -> offsetY(-offset);
-            case Rotation.RIGHT -> offsetX(-offset);
-            case Rotation.BACK -> offsetY(offset);
-            case Rotation.LEFT -> offsetX(offset);
+            case Rotation.EAST -> offsetY(-offset);
+            case Rotation.SOUTH -> offsetX(-offset);
+            case Rotation.WEST -> offsetY(offset);
+            case Rotation.NORTH -> offsetX(offset);
         };
     }
 

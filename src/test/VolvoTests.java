@@ -19,13 +19,13 @@ public class VolvoTests {
     @Test
     public void turnsRight() {
         volvo.turnRight();
-        Assertions.assertEquals(Rotation.RIGHT, volvo.getRotation());
+        Assertions.assertEquals(Rotation.SOUTH, volvo.getRotation());
     }
 
     @Test
     public void turnsLeft() {
         volvo.turnLeft();
-        Assertions.assertEquals(Rotation.LEFT, volvo.getRotation());
+        Assertions.assertEquals(Rotation.NORTH, volvo.getRotation());
     }
 
     @Test
@@ -34,7 +34,7 @@ public class VolvoTests {
         volvo.turnLeft();
         volvo.turnRight();
         volvo.turnRight();
-        Assertions.assertEquals(Rotation.FORWARD, volvo.getRotation());
+        Assertions.assertEquals(Rotation.EAST, volvo.getRotation());
     }
 
     @Test

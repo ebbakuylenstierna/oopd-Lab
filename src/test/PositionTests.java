@@ -10,15 +10,15 @@ public class PositionTests {
         Position p = new Position();
         assertEquals(0, p.getX());
         assertEquals(0, p.getY());
-        assertEquals(Rotation.FORWARD, p.getRotation());
+        assertEquals(Rotation.EAST, p.getRotation());
     }
 
     @Test
     public void createPosition() {
-        Position p = new Position(1, 2, Rotation.LEFT);
+        Position p = new Position(1, 2, Rotation.NORTH);
         assertEquals(1, p.getX());
         assertEquals(2, p.getY());
-        assertEquals(Rotation.LEFT, p.getRotation());
+        assertEquals(Rotation.NORTH, p.getRotation());
     }
 
     @Test
@@ -38,13 +38,13 @@ public class PositionTests {
     @Test
     public void setsRotation() {
         Position p = new Position();
-        p.setRotation(Rotation.RIGHT);
-        assertEquals(Rotation.RIGHT, p.getRotation());
+        p.setRotation(Rotation.SOUTH);
+        assertEquals(Rotation.SOUTH, p.getRotation());
     }
 
     @Test
     public void equalsCopy() {
-        Position p = new Position(1, 2, Rotation.LEFT);
+        Position p = new Position(1, 2, Rotation.NORTH);
         Position copy = p.copy();
         assertEquals(p, copy);
     }
@@ -52,76 +52,76 @@ public class PositionTests {
     @Test
     public void updatesPosition() {
         Position p1 = new Position();
-        Position p2 = new Position(1, 2, Rotation.LEFT);
+        Position p2 = new Position(1, 2, Rotation.NORTH);
         p1.update(p2);
         assertEquals(p2, p1);
     }
 
     @Test
     public void offsetsX() {
-        Position p1 = new Position(1, 2, Rotation.LEFT);
+        Position p1 = new Position(1, 2, Rotation.NORTH);
         Position p2 = p1.offsetX(3);
         assertEquals(4, p2.getX());
         assertEquals(2, p2.getY());
-        assertEquals(Rotation.LEFT, p2.getRotation());
+        assertEquals(Rotation.NORTH, p2.getRotation());
 
         assertEquals(1, p1.getX());
         assertEquals(2, p1.getY());
-        assertEquals(Rotation.LEFT, p1.getRotation());
+        assertEquals(Rotation.NORTH, p1.getRotation());
     }
 
     @Test
     public void offsetsY() {
-        Position p1 = new Position(1, 2, Rotation.LEFT);
+        Position p1 = new Position(1, 2, Rotation.NORTH);
         Position p2 = p1.offsetY(4);
         assertEquals(1, p2.getX());
         assertEquals(6, p2.getY());
-        assertEquals(Rotation.LEFT, p2.getRotation());
+        assertEquals(Rotation.NORTH, p2.getRotation());
 
         assertEquals(1, p1.getX());
         assertEquals(2, p1.getY());
-        assertEquals(Rotation.LEFT, p1.getRotation());
+        assertEquals(Rotation.NORTH, p1.getRotation());
     }
 
     @Test
     public void offsetsForward() {
-        Position p1 = new Position(1, 2, Rotation.LEFT);
+        Position p1 = new Position(1, 2, Rotation.NORTH);
         Position p2 = p1.offsetForward(3);
         assertEquals(p1.offsetY(3), p2);
     }
 
     @Test
     public void offsetsRight() {
-        Position p1 = new Position(1, 2, Rotation.LEFT);
+        Position p1 = new Position(1, 2, Rotation.NORTH);
         Position p2 = p1.offsetRight(3);
         assertEquals(p1.offsetX(3), p2);
     }
 
     @Test
     public void turnsRight() {
-        Position p1 = new Position(1, 2, Rotation.RIGHT);
+        Position p1 = new Position(1, 2, Rotation.SOUTH);
         Position p2 = p1.turnedRight();
 
         assertEquals(1, p2.getX());
         assertEquals(2, p2.getY());
-        assertEquals(Rotation.BACK, p2.getRotation());
+        assertEquals(Rotation.WEST, p2.getRotation());
 
         assertEquals(1, p1.getX());
         assertEquals(2, p1.getY());
-        assertEquals(Rotation.RIGHT, p1.getRotation());
+        assertEquals(Rotation.SOUTH, p1.getRotation());
     }
 
     @Test
     public void turnsLeft() {
-        Position p1 = new Position(1, 2, Rotation.RIGHT);
+        Position p1 = new Position(1, 2, Rotation.SOUTH);
         Position p2 = p1.turnedLeft();
 
         assertEquals(1, p2.getX());
         assertEquals(2, p2.getY());
-        assertEquals(Rotation.FORWARD, p2.getRotation());
+        assertEquals(Rotation.EAST, p2.getRotation());
 
         assertEquals(1, p1.getX());
         assertEquals(2, p1.getY());
-        assertEquals(Rotation.RIGHT, p1.getRotation());
+        assertEquals(Rotation.SOUTH, p1.getRotation());
     }
 }
