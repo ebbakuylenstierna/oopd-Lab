@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
-public class TransportableTests {
+public class TransportedTests {
     TransportableCar car;
     VolvoCarTransporter transporter;
 
@@ -15,6 +15,7 @@ public class TransportableTests {
         car = new Volvo240();
         transporter = new VolvoCarTransporter();
 
+        transporter.lowerRamp();
         transporter.transport(car);
     }
 
