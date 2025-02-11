@@ -1,6 +1,7 @@
 package lab.car;
 
 import lab.Position;
+import lab.Positioned;
 import lab.Rotation;
 
 import java.awt.*;
@@ -51,12 +52,18 @@ public abstract class Car implements ICar {
         position.setRotation(rotation);
     }
 
+    @Override
     public Position getPosition() {
         return position.copy();
     }
 
     protected void setPosition(Position position) {
-        position.update(position);
+        this.position.update(position);
+    }
+
+    @Override
+    public double distanceTo(Positioned other) {
+        return position.distanceTo(other);
     }
 
     @Override

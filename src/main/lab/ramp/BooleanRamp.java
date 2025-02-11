@@ -15,6 +15,6 @@ public class BooleanRamp implements Ramp {
 
     @Override
     public boolean isRampLowered() {
-        return isRampUp;
+        return !isRampUp;
     }
 }

@@ -48,6 +48,16 @@ public class Position implements Positioned {
         return rotation;
     }
 
+    @Override
+    public Position getPosition() {
+        return this;
+    }
+
+    @Override
+    public double distanceTo(Positioned other) {
+        return Math.sqrt(Math.pow(this.getX() - other.getX(), 2) + Math.pow(this.getY() - other.getY(), 2));
+    }
+
     public void setRotation(Rotation rotation) {
         this.rotation = rotation;
     }
@@ -105,5 +115,14 @@ public class Position implements Positioned {
     @Override
     public int hashCode() {
         return Objects.hash(x, y, rotation);
+    }
+
+    @Override
+    public String toString() {
+        return "Position{" +
+                "x=" + x +
+                ", y=" + y +
+                ", rotation=" + rotation +
+                '}';
     }
 }

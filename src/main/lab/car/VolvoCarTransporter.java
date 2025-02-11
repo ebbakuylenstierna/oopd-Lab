@@ -26,14 +26,19 @@ public class VolvoCarTransporter extends CarWithRamp<BooleanRamp> implements Car
     public void addCar(TransportableCar car) {
         if (!isRampLowered())
             throw new IllegalStateException("Cannot add car while ramp is raised");
+        if (distanceTo(car) > 1)
+            throw new IllegalStateException("Car is too far away");
+
         car.startTransport(this);
         holder.addCar(car);
+        updateTransportedPositions();
     }
 
     @Override
     public TransportableCar removeCar() {
         if (!isRampLowered())
             throw new IllegalStateException("Cannot remove car while ramp is raised");
+
         TransportableCar car = holder.removeCar();
         car.setPosition(getPosition().offsetForward(-1));
         car.endTransport();
@@ -63,8 +68,18 @@ public class VolvoCarTransporter extends CarWithRamp<BooleanRamp> implements Car
     @Override
     public void move() {
         super.move();
+        updateTransportedPositions();
+    }
 
-        // Update held cars' positions
+    @Override
+    public void turnRight() {
+        super.turnRight();
+        updateTransportedPositions();
+    }
+
+    @Override
+    public void turnLeft() {
+        super.turnLeft();
         updateTransportedPositions();
     }
 

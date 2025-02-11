@@ -66,4 +66,9 @@ public class CarMechanic<T extends ICar> implements CarHolder<T>, Positioned {
     public Position getPosition() {
         return position.copy();
     }
+
+    @Override
+    public double distanceTo(Positioned other) {
+        return position.distanceTo(other);
+    }
 }
