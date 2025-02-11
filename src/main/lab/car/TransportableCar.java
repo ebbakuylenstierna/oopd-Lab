@@ -42,8 +42,9 @@ public abstract class TransportableCar extends Car implements Transportable<Tran
 
     @Override
     public void moveToTransporter() {
-        setX(transporter.getX());
-        setY(transporter.getY());
-        setRotation(transporter.getRotation());
+        if (!isBeingTransported())
+            throw new IllegalStateException("Car is not being transported");
+
+        setPosition(transporter.getPosition());
     }
 }
