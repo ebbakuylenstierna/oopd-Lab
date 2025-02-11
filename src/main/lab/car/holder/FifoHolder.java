@@ -9,8 +9,8 @@ public class FifoHolder<T extends ICar> extends DequeHolder<T> {
 
     @Override
     public void addCar(T car) {
-        if (cars.size() >= size()) {
-            throw new RuntimeException("Car holder is full");
+        if (isFull()) {
+            throw new IllegalStateException("Car holder is full");
         }
         cars.addLast(car);
     }

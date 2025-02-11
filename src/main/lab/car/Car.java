@@ -1,14 +1,14 @@
 package lab.car;
 
+import lab.Position;
+import lab.Positioned;
 import lab.Rotation;
 
 import java.awt.*;
 
 public abstract class Car implements ICar {
 
-    private double xPosition = 0;
-    private double yPosition = 0;
-    private Rotation rotation = Rotation.FORWARD;
+    private final Position position = new Position();
 
     private final int nrDoors; // Number of doors on the lab.car
 
@@ -30,13 +30,41 @@ public abstract class Car implements ICar {
     }
 
     @Override
-    public double getX() {return xPosition;}
+    public double getX() {
+        return position.getX();
+    }
+
+    protected void setX(double x) {
+        position.setX(x);
+    }
 
     @Override
-    public double getY() {return yPosition;}
+    public double getY() {return position.getY();}
+
+    protected void setY(double y) {
+        position.setY(y);
+    }
 
     @Override
-    public Rotation getRotation() {return rotation;}
+    public Rotation getRotation() {return position.getRotation();}
+
+    protected void setRotation(Rotation rotation) {
+        position.setRotation(rotation);
+    }
+
+    @Override
+    public Position getPosition() {
+        return position.copy();
+    }
+
+    protected void setPosition(Position position) {
+        this.position.update(position);
+    }
+
+    @Override
+    public double distanceTo(Positioned other) {
+        return position.distanceTo(other);
+    }
 
     @Override
     public int getNrDoors() {return nrDoors;}
@@ -83,28 +111,15 @@ public abstract class Car implements ICar {
 
 
     public void move() {
-        switch (rotation) {
-            case Rotation.FORWARD:
-                xPosition += currentSpeed;
-                break;
-            case Rotation.RIGHT:
-                yPosition -= currentSpeed;
-                break;
-            case Rotation.BACK:
-                xPosition -= currentSpeed;
-                break;
-            case Rotation.LEFT:
-                yPosition += currentSpeed;
-                break;
-        }
+        position.update(position.offsetForward(currentSpeed));
     }
 
     public void turnLeft() {
-        rotation = rotation.turnLeft();
+        position.update(position.turnedLeft());
     }
 
     public void turnRight() {
-        rotation = rotation.turnRight();
+        position.update(position.turnedRight());
     }
 
     @Override

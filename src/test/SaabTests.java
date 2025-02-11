@@ -19,13 +19,13 @@ public class SaabTests {
     @Test
     public void turnsRight() {
         saab.turnRight();
-        Assertions.assertEquals(Rotation.RIGHT, saab.getRotation());
+        Assertions.assertEquals(Rotation.SOUTH, saab.getRotation());
     }
 
     @Test
     public void turnsLeft() {
         saab.turnLeft();
-        Assertions.assertEquals(Rotation.LEFT, saab.getRotation());
+        Assertions.assertEquals(Rotation.NORTH, saab.getRotation());
     }
 
     @Test
@@ -34,7 +34,7 @@ public class SaabTests {
         saab.turnLeft();
         saab.turnRight();
         saab.turnRight();
-        Assertions.assertEquals(Rotation.FORWARD, saab.getRotation());
+        Assertions.assertEquals(Rotation.EAST, saab.getRotation());
     }
 
     @Test

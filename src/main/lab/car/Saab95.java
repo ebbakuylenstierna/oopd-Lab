@@ -2,7 +2,7 @@ package lab.car;
 
 import java.awt.*;
 
-public class Saab95 extends Car implements SmallCar {
+public class Saab95 extends TransportableCar {
 
     private boolean turboOn;
 
