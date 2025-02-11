@@ -14,9 +14,9 @@ public abstract class CarWithRamp<T extends Ramp> extends Car implements Ramp {
 
     @Override
     public void gas(double amount) {
-        if (!isRampLowered()) {
-            super.gas(amount);
-        }
+        if (isRampLowered())
+            throw new IllegalStateException("Cannot drive while ramp is lowered");
+        super.gas(amount);
     }
 
     @Override

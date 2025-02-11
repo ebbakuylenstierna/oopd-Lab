@@ -24,6 +24,12 @@ public class CarTransporterTests {
     }
 
     @Test
+    public void cannotGasWhileLowered() {
+        transporter.lowerRamp();
+        assertThrowsExactly(IllegalStateException.class, () -> transporter.gas(1));
+    }
+
+    @Test
     public void startsEmpty() {
         assertTrue(transporter.isEmpty());
     }
