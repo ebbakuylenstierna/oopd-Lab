@@ -7,7 +7,7 @@ import java.awt.*;
 
 public abstract class Car implements ICar {
 
-    private final Position position = Position.ZERO;
+    private final Position position = new Position();
 
     private final int nrDoors; // Number of doors on the lab.car
 

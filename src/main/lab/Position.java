@@ -1,8 +1,8 @@
 package lab;
 
-public class Position implements Positioned {
-    public static Position ZERO = new Position(0, 0, Rotation.FORWARD);
+import java.util.Objects;
 
+public class Position implements Positioned {
     private double x;
     private double y;
     private Rotation rotation;
@@ -15,6 +15,10 @@ public class Position implements Positioned {
 
     public Position(Position position) {
         this(position.getX(), position.getY(), position.getRotation());
+    }
+
+    public Position() {
+        this(0, 0, Rotation.FORWARD);
     }
 
     public static Position copyOf(Position position) {
@@ -90,5 +94,16 @@ public class Position implements Positioned {
 
     public Position turnedRight() {
         return new Position(x, y, rotation.turnRight());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Position position)) return false;
+        return Double.compare(x, position.x) == 0 && Double.compare(y, position.y) == 0 && rotation == position.rotation;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y, rotation);
     }
 }
