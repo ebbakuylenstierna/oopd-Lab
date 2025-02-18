@@ -4,8 +4,6 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -16,8 +14,8 @@ import java.awt.event.ActionListener;
  **/
 
 public class CarView extends JFrame{
-    private static final int X = 800;
-    private static final int Y = 800;
+    public static final int X = 800;
+    public static final int Y = 800;
 
     // The controller member
     CarController carC;
@@ -33,10 +31,10 @@ public class CarView extends JFrame{
 
     JButton gasButton = new JButton("Gas");
     JButton brakeButton = new JButton("Brake");
-    JButton turboOnButton = new JButton("Saab Turbo on");
-    JButton turboOffButton = new JButton("Saab Turbo off");
-    JButton liftBedButton = new JButton("Scania Lift Bed");
-    JButton lowerBedButton = new JButton("Lower Lift Bed");
+    JButton turboOnButton = new JButton("Turbo on");
+    JButton turboOffButton = new JButton("Turbo off");
+    JButton liftBedButton = new JButton("Lift bed");
+    JButton lowerBedButton = new JButton("Lower bed");
 
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
@@ -104,13 +102,13 @@ public class CarView extends JFrame{
         // This actionListener is for the gas button only
         // TODO: Create more for each component as necessary
         gasButton.addActionListener(_ -> carC.gas(gasAmount));
-//        brakeButton.addActionListener(_ -> carC)
-//        turboOnButton.addActionListener(_ -> carC.)
-//        turboOffButton.addActionListener(_ -> carC.)
-//        liftBedButton.addActionListener(_ -> carC.)
-//        lowerBedButton.addActionListener(_ -> carC.)
-//        startButton.addActionListener(_ -> carC.)
-//        stopButton.addActionListener(_ -> carC.)
+        brakeButton.addActionListener(_ -> carC.brake(gasAmount));
+        turboOnButton.addActionListener(_ -> carC.turboOn());
+        turboOffButton.addActionListener(_ -> carC.turboOff());
+        liftBedButton.addActionListener(_ -> carC.liftBed());
+        lowerBedButton.addActionListener(_ -> carC.lowerBed());
+        startButton.addActionListener(_ -> carC.startAll());
+        stopButton.addActionListener(_ -> carC.stopAll());
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();

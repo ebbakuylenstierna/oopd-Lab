@@ -7,7 +7,7 @@ public class Volvo240 extends TransportableCar {
     protected double trimFactor = 1.25;
     
     public Volvo240(){
-        super(4, Color.black, 100, "lab.car.Volvo240");
+        super(4, Color.black, 100, "Volvo240");
     }
     
     protected double speedFactor(){

@@ -1,12 +1,12 @@
 package lab.graphics;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 // This panel represents the animated part of the view with the car images.
 
@@ -39,10 +39,11 @@ public class DrawPanel extends JPanel{
 
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.
-            InputStream imageStream = DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg");
+            String RESOURCE_PATH = "src/main/resources";
+            InputStream imageStream = new FileInputStream(String.format("%s/pics/Volvo240.jpg", RESOURCE_PATH));
             System.out.println(imageStream);
             volvoImage = ImageIO.read(imageStream);
-            volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg"));
+            volvoWorkshopImage = ImageIO.read(new FileInputStream(String.format("%s/pics/VolvoBrand.jpg", RESOURCE_PATH)));
         } catch (IOException ex)
         {
             ex.printStackTrace();
