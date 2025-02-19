@@ -8,12 +8,12 @@ public interface Transportable<T extends Transportable<?>> extends Positioned {
     /**
      * @throws IllegalStateException when already being transported
      */
-    void startTransport(Transporter<T> transporter);
+    void startTransport(Transporter<? extends T> transporter);
     /**
      * @throws IllegalStateException when not being transported
      */
     void endTransport();
-    Optional<Transporter<T>> getTransporter();
+    Optional<Transporter<? extends T>> getTransporter();
     boolean isBeingTransported();
 
     /**

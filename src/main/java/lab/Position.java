@@ -83,9 +83,9 @@ public class Position implements Positioned {
     public Position offsetForward(double offset) {
         return switch (rotation) {
             case Rotation.EAST -> offsetX(offset);
-            case Rotation.SOUTH -> offsetY(-offset);
+            case Rotation.SOUTH -> offsetY(offset);
             case Rotation.WEST -> offsetX(-offset);
-            case Rotation.NORTH -> offsetY(offset);
+            case Rotation.NORTH -> offsetY(-offset);
         };
     }
 

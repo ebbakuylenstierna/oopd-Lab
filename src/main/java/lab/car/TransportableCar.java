@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.Optional;
 
 public abstract class TransportableCar extends Car implements Transportable<TransportableCar> {
-    private Transporter<TransportableCar> transporter;
+    private Transporter<? extends TransportableCar> transporter;
 
     public TransportableCar(int nrDoors, Color color, double enginePower, String modelName) {
         super(nrDoors, color, enginePower, modelName);
@@ -15,7 +15,7 @@ public abstract class TransportableCar extends Car implements Transportable<Tran
     }
 
     @Override
-    public void startTransport(Transporter<TransportableCar> transporter) {
+    public void startTransport(Transporter<? extends TransportableCar> transporter) {
         if (isBeingTransported())
             throw new IllegalStateException("Car is already being transported");
 
@@ -31,7 +31,7 @@ public abstract class TransportableCar extends Car implements Transportable<Tran
     }
 
     @Override
-    public Optional<Transporter<TransportableCar>> getTransporter() {
+    public Optional<Transporter<? extends TransportableCar>> getTransporter() {
         return Optional.ofNullable(this.transporter);
     }
 
@@ -45,6 +45,7 @@ public abstract class TransportableCar extends Car implements Transportable<Tran
         if (!isBeingTransported())
             throw new IllegalStateException("Car is not being transported");
 
+        stopEngine();
         setPosition(transporter.getPosition());
     }
 

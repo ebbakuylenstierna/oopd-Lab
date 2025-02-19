@@ -24,6 +24,11 @@ public class DrawPanel extends JPanel{
         carPoints.get(index).y = y;
     }
 
+    void moveWorkshop(int x, int y) {
+        volvoWorkshopPoint.x = x;
+        volvoWorkshopPoint.y = y;
+    }
+
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {
         this.setDoubleBuffered(true);

@@ -34,4 +34,9 @@ public abstract class DequeHolder<T extends ICar> implements CarHolder<T> {
     public List<T> getCars() {
         return List.copyOf(cars);
     }
+
+    @Override
+    public boolean containsCar(T car) {
+        return cars.contains(car);
+    }
 }

@@ -14,4 +14,5 @@ public interface CarHolder<T extends ICar> {
     boolean isFull();
     boolean isEmpty();
     List<T> getCars();
+    boolean containsCar(T car);
 }

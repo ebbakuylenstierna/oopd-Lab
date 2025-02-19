@@ -63,6 +63,11 @@ public class VolvoCarTransporter extends CarWithRamp<BooleanRamp> implements Car
     }
 
     @Override
+    public boolean containsCar(TransportableCar car) {
+        return holder.containsCar(car);
+    }
+
+    @Override
     public int size() {
         return holder.size();
     }
