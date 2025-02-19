@@ -1,8 +1,6 @@
 package lab.graphics;
 
-import lab.car.HasTurbo;
-import lab.car.ICar;
-import lab.car.Volvo240;
+import lab.car.*;
 import lab.ramp.Ramp;
 
 import javax.swing.*;
@@ -13,7 +11,7 @@ import java.util.List;
 
 /*
  * This class represents the Controller part in the MVC pattern.
- * It's responsibilities is to listen to the View and responds in a appropriate manner by
+ * Its responsibilities are to listen to the View and responds in an appropriate manner by
  * modifying the model state and the updating the view.
  */
 
@@ -38,7 +36,9 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
-        cc.cars.add(new Volvo240());
+        cc.cars.add(new Volvo240(0, 0));
+        cc.cars.add(new Saab95(0, 100));
+        cc.cars.add(new Scania(0, 200));
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -52,20 +52,30 @@ public class CarController {
      * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (ICar car : cars) {
+            for (int i = 0; i < cars.size(); i++) {
+                ICar car = cars.get(i);
                 car.move();
-                flipIfNearWall(car);
+                flipIfNearWall(i);
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
-                frame.drawPanel.moveit(x, y);
+                frame.drawPanel.moveit(i, x, y);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
         }
     }
 
-    private void flipIfNearWall(ICar car) {
-        if (car.getX() < 0 || car.getX() > frame.drawPanel.getWidth() - frame.drawPanel.volvoImage.getWidth()) {
+    private void flipIfNearWall(int index) {
+        ICar car = cars.get(index);
+        double xMin = 0;
+        double xMax = frame.drawPanel.getWidth() - frame.drawPanel.carImages.get(index).getWidth();
+        double yMin = 0;
+        double yMax = frame.drawPanel.getHeight() - frame.drawPanel.carImages.get(index).getHeight();
+
+        if (car.getX() < xMin
+                || car.getX() > xMax
+                || car.getY() < yMin
+                || car.getY() > yMax) {
             car.turnRight();
             car.turnRight();
         }

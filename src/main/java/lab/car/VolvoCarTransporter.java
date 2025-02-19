@@ -1,5 +1,6 @@
 package lab.car;
 
+import lab.Position;
 import lab.car.holder.CarHolder;
 import lab.car.holder.FiloHolder;
 import lab.ramp.BooleanRamp;
@@ -15,6 +16,17 @@ public class VolvoCarTransporter extends CarWithRamp<BooleanRamp> implements Car
     public VolvoCarTransporter() {
         super(2, Color.WHITE, 250, "VolvoCarTransporter", new BooleanRamp());
         holder = new FiloHolder<>(5);
+    }
+
+    public VolvoCarTransporter(Position position){
+        this();
+        setPosition(position);
+    }
+
+    public VolvoCarTransporter(double x, double y){
+        this();
+        setX(x);
+        setY(y);
     }
 
     @Override

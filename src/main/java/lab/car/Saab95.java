@@ -1,5 +1,7 @@
 package lab.car;
 
+import lab.Position;
+
 import java.awt.*;
 
 public class Saab95 extends TransportableCar implements HasTurbo {
@@ -11,6 +13,16 @@ public class Saab95 extends TransportableCar implements HasTurbo {
 	    turboOn = false;
     }
 
+    public Saab95(Position position){
+        this();
+        setPosition(position);
+    }
+
+    public Saab95(double x, double y){
+        this();
+        setX(x);
+        setY(y);
+    }
 
     @Override
     public void setTurboOn(){
