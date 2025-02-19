@@ -77,7 +77,7 @@ public class VolvoTests {
         volvo.gas(1);
         volvo.turnRight();
         volvo.move();
-        assertTrue(volvo.getY() < 0, "lab.car.Car has not moved right");
+        assertTrue(volvo.getY() > 0, "lab.car.Car has not moved right");
     }
 
     @Test
@@ -85,7 +85,7 @@ public class VolvoTests {
         volvo.gas(1);
         volvo.turnLeft();
         volvo.move();
-        assertTrue(volvo.getY() > 0, "lab.car.Car has not moved left");
+        assertTrue(volvo.getY() < 0, "lab.car.Car has not moved left");
     }
 
     @Test
@@ -106,7 +106,7 @@ public class VolvoTests {
 
     @Test
     public void correctModelName() {
-        assertEquals("lab.car.Volvo240", volvo.getModelName());
+        assertEquals("Volvo240", volvo.getModelName());
     }
 
     @Test

@@ -77,7 +77,7 @@ public class SaabTests {
         saab.gas(1);
         saab.turnRight();
         saab.move();
-        assertTrue(saab.getY() < 0, "lab.car.Car has not moved right");
+        assertTrue(saab.getY() > 0, "lab.car.Car has not moved right");
     }
 
     @Test
@@ -85,7 +85,7 @@ public class SaabTests {
         saab.gas(1);
         saab.turnLeft();
         saab.move();
-        assertTrue(saab.getY() > 0, "lab.car.Car has not moved left");
+        assertTrue(saab.getY() < 0, "lab.car.Car has not moved left");
     }
 
     @Test
@@ -105,7 +105,7 @@ public class SaabTests {
 
     @Test
     public void correctModelName() {
-        assertEquals("lab.car.Saab95", saab.getModelName());
+        assertEquals("Saab95", saab.getModelName());
     }
 
     @Test

@@ -87,7 +87,7 @@ public class PositionTests {
     public void offsetsForward() {
         Position p1 = new Position(1, 2, Rotation.NORTH);
         Position p2 = p1.offsetForward(3);
-        assertEquals(p1.offsetY(3), p2);
+        assertEquals(p1.offsetY(-3), p2);
     }
 
     @Test
