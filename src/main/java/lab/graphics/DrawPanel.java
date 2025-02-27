@@ -1,5 +1,9 @@
 package lab.graphics;
 
+import lab.car.ICar;
+import lab.car.TransportableCar;
+import lab.car.mechanic.CarMechanic;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // This panel represents the animated part of the view with the car images.
-public class DrawPanel extends JPanel{
+public class DrawPanel<T extends TransportableCar> extends JPanel implements CarView<T> {
 
     List<BufferedImage> carImages = new ArrayList<>();
     List<Point> carPoints = new ArrayList<>();
@@ -66,5 +70,16 @@ public class DrawPanel extends JPanel{
             g.drawImage(image, point.x, point.y, null); // see javadoc for more info on the parameters
         }
         g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
+    }
+
+    @Override
+    public void updateModel(CarModel<T> model) {
+        CarMechanic<?> workshop = model.getWorkshop();
+        volvoWorkshopPoint = new Point((int)Math.round(workshop.getX()), (int)Math.round(workshop.getY()));
+        List<ICar> cars = model.getCars();
+        for (int i = 0; i < carImages.size(); i++) {
+            ICar car = cars.get(i);
+            carPoints.get(i).setLocation((int)Math.round(car.getX()), (int)Math.round(car.getY()));
+        }
     }
 }

@@ -30,7 +30,7 @@ public class CarController {
     private final Timer timer = new Timer(delay, new TimerListener());
 
     // The frame that represents this instance View of the MVC pattern
-    CarView frame;
+    CarWindow frame;
     // A list of cars, modify if needed
     private final List<ICar> cars = new ArrayList<>();
 
@@ -53,7 +53,7 @@ public class CarController {
 
 
         // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
+        cc.frame = new CarWindow("CarSim 1.0", cc);
 
         // Start the timer
         cc.timer.start();
