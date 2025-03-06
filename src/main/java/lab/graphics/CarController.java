@@ -20,16 +20,17 @@ public class CarController {
     private final Timer timer = new Timer(delay, new TimerListener());
 
     // The frame that represents this instance View of the MVC pattern
-    private final CarWindow frame;
+    private final CarFrame frame;
 
     // Represents Model of the MVC pattern
     private final CarModel model;
 
     //methods:
-    public CarController(CarWindow frame, CarModel model) {
+    public CarController(CarFrame frame, CarModel model) {
         this.frame = frame;
         this.model = model;
 
+        // Connect model to action buttons
         frame.addModelObservers(model);
 
         // Start the timer

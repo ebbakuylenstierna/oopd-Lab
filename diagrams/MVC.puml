@@ -1,0 +1,192 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class AllRoundMechanic
+class AngledRamp
+class BooleanRamp
+class Car
+class CarProgram {
+    + static main(String[])
+}
+class CarController
+interface CarModel << interface >> {
+    + update()
+
+    + getCars(): List<ICar>
+    + getWorkshop(): CarMechanic<?>
+
+    + gas(int)
+    + brake(int)
+    + turboOn()
+    + turboOff()
+    + liftBed()
+    + lowerBed()
+    + startAll()
+    + stopAll()
+    + turnLeft()
+    + turnRight()
+}
+class DemoModel {
+    + getWorkshop(): CarMechanic<Volvo240>
+}
+interface CarHolder<T> << interface >> {
+    + addCar(T): void
+    + removeCar(): T
+
+    + size(): int
+    + isFull(): boolean
+    + isEmpty(): boolean
+
+    + getCars(): List<T>
+    + containsCar(T): boolean
+}
+class CarMechanic<T>
+interface CarView {
+    + updateModel(CarModel)
+}
+interface CarFrame {
+    + addModelObservers(CarModel)
+}
+class CarWindow {
+    + addModelObservers(CarModel)
+    + updateModel(CarModel)
+}
+class CarWithRamp<T>
+class DequeHolder<T>
+class DrawPanel {
+    + updateModel(CarModel)
+}
+class FifoHolder<T>
+class FiloHolder<T>
+interface HasTurbo << interface >> {
+    + setTurboOn()
+    + setTurboOff()
+    + isTurboOn(): boolean
+}
+interface IAngledRamp << interface >> {
+    + getRampAngle(): int
+}
+interface ICar << interface >> {
+    + getNrDoors(): int
+    + getEnginePower(): double
+    + getModelName(): String
+
+    + getColor(): Color
+    + setColor(Color)
+
+    + startEngine()
+    + stopEngine()
+
+    + getCurrentSpeed(): double
+    + isStandingStill(): boolean
+
+    + gas(double)
+    + brake(double)
+}
+interface Movable << interface >> {
+    + move()
+    + turnLeft()
+    + turnRight()
+}
+class Position
+interface Positioned << interface >> {
+    + getX(): double
+    + getY(): double
+    + getRotation(): Rotation
+    + getPosition(): Position
+    + distanceTo(Positioned other): double
+}
+interface Ramp << interface >> {
+    + raiseRamp()
+    + lowerRamp()
+    + isRampLowered(): boolean
+}
+enum Rotation << enumeration >> {
+    NORTH
+    EAST
+    SOUTH
+    WEST
+
+    + turnRight(): Rotation
+    + turnLeft(): Rotation
+    + flip(): Rotation
+}
+class Saab95
+class Scania
+interface Transportable<T> << interface >> {
+    + startTransport(Transporter<? extends T>)
+    + endTransport()
+    + getTransporter(): Optional<Transporter<? extends T>>
+    + isBeingTransported(): boolean
+    + moveToTransporter()
+}
+class TransportableCar
+interface Transporter<T> << interface >> {
+    + transport(T)
+    + updateTransportedPositions()
+}
+class Volvo240
+class Volvo240Mechanic
+class VolvoCarTransporter
+
+AllRoundMechanic     -[#000082,plain]-^  CarMechanic
+AngledRamp           -[#008200,dashed]-^  IAngledRamp
+BooleanRamp          -[#008200,dashed]-^  Ramp
+Car                  -[#008200,dashed]-^  ICar
+CarHolder            -[#595959,dashed]->  ICar
+CarMechanic          -[#008200,dashed]-^  CarHolder
+CarMechanic          -[#008200,dashed]-^  Positioned
+CarMechanic          -[#595959,dashed]->  TransportableCar
+CarMechanic          -[#008200,dashed]-^  Transporter
+CarWithRamp          -[#000082,plain]-^  Car
+CarWithRamp          -[#008200,dashed]-^  Ramp
+DequeHolder          -[#008200,dashed]-^  CarHolder
+DequeHolder          -[#595959,dashed]->  ICar
+FifoHolder           -[#000082,plain]-^  DequeHolder
+FifoHolder           -[#595959,dashed]->  ICar
+FiloHolder           -[#000082,plain]-^  DequeHolder
+FiloHolder           -[#595959,dashed]->  ICar
+IAngledRamp          -[#008200,plain]-^  Ramp
+ICar                 -[#008200,plain]-^  Movable
+Movable              -[#008200,plain]-^  Positioned
+Position             -[#008200,dashed]-^  Positioned
+Saab95               -[#008200,dashed]-^  HasTurbo
+Saab95               -[#000082,plain]-^  TransportableCar
+Scania               -[#000082,plain]-^  CarWithRamp
+Scania               -[#008200,dashed]-^  IAngledRamp
+Transportable        -[#008200,plain]-^  Positioned
+TransportableCar     -[#000082,plain]-^  Car
+TransportableCar     -[#008200,dashed]-^  Transportable
+Transporter          -[#008200,plain]-^  Positioned
+Transporter          -[#595959,dashed]->  Transportable
+Volvo240             -[#000082,plain]-^  TransportableCar
+Volvo240Mechanic     -[#000082,plain]-^  CarMechanic
+VolvoCarTransporter  -[#008200,dashed]-^  CarHolder
+VolvoCarTransporter  -[#000082,plain]-^  CarWithRamp
+VolvoCarTransporter  -[#008200,dashed]-^  Transporter
+CarWindow            -[#595959,plain]->   DrawPanel
+DemoModel            -[#595959,dashed]->  Volvo240
+DemoModel            -[#595959,dashed]->  Saab95
+DemoModel            -[#595959,dashed]->  Scania
+DemoModel            -[#595959,dashed]->  Volvo240Mechanic
+CarController           -[#008200,dashed]->  CarFrame
+CarController           -[#008200,dashed]->  CarModel
+CarProgram           -[#595959,plain]->  CarWindow
+CarProgram           -[#595959,plain]->  DemoModel
+CarProgram           -[#595959,plain]->  CarController
+Position             -[#595959,dashed]->  Rotation
+VolvoCarTransporter  -[#008200,plain]->  BooleanRamp
+Scania               -[#008200,plain]->  AngledRamp
+CarMechanic          -[#008200,plain]->  FifoHolder
+VolvoCarTransporter  -[#008200,plain]->  FiloHolder
+TransportableCar     -[#595959,dashed]->  Transporter
+CarModel             -[#595959,dashed]->  ICar
+CarModel             -[#595959,dashed]->  CarMechanic
+CarWindow            -[#008200,dashed]-^   CarFrame
+CarFrame             -[#000082,plain]-^   CarView
+DrawPanel            -[#008200,dashed]-^   CarView
+DemoModel            -[#008200,dashed]-^   CarModel
+@enduml

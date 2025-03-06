@@ -163,8 +163,6 @@ public class DemoModel implements CarModel {
     public void turnLeft() {
         for (ICar car : cars) {
             try {
-
-
                 car.turnLeft();
             } catch (IllegalStateException _) {
             }

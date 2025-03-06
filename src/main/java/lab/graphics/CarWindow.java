@@ -10,7 +10,7 @@ import java.awt.*;
  * each of it's components.
  **/
 
-public class CarWindow extends JFrame implements CarView {
+public class CarWindow extends JFrame implements CarFrame {
     public static final int X = 800;
     public static final int Y = 800;
 
@@ -103,6 +103,7 @@ public class CarWindow extends JFrame implements CarView {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    @Override
     public void addModelObservers(CarModel model) {
         gasButton.addActionListener(_ -> model.gas(gasAmount));
         brakeButton.addActionListener(_ -> model.brake(gasAmount));

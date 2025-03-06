@@ -22,16 +22,6 @@ public class DrawPanel extends JPanel implements CarView {
     BufferedImage volvoWorkshopImage;
     Point volvoWorkshopPoint = new Point(300,300);
 
-    void moveit(int index, int x, int y){
-        carPoints.get(index).x = x;
-        carPoints.get(index).y = y;
-    }
-
-    void moveWorkshop(int x, int y) {
-        volvoWorkshopPoint.x = x;
-        volvoWorkshopPoint.y = y;
-    }
-
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {
         this.setDoubleBuffered(true);
@@ -73,13 +63,22 @@ public class DrawPanel extends JPanel implements CarView {
 
     @Override
     public void updateModel(CarModel model) {
+        // Move workshop
         CarMechanic<?> workshop = model.getWorkshop();
-        volvoWorkshopPoint = new Point((int)Math.round(workshop.getX()), (int)Math.round(workshop.getY()));
+        int workshopX = (int) Math.round(workshop.getX());
+        int workshopY = (int) Math.round(workshop.getY());
+        volvoWorkshopPoint = new Point(workshopX, workshopY);
+
+        // Move cars
         List<ICar> cars = model.getCars();
         for (int i = 0; i < carImages.size(); i++) {
             ICar car = cars.get(i);
-            carPoints.get(i).setLocation((int)Math.round(car.getX()), (int)Math.round(car.getY()));
+            int carX = (int) Math.round(car.getX());
+            int carY = (int) Math.round(car.getY());
+            carPoints.get(i).setLocation(carX, carY);
         }
+
+        // Repaint
         repaint();
     }
 }
