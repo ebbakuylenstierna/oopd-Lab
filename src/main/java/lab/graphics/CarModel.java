@@ -19,4 +19,7 @@ public interface CarModel {
     void stopAll();
     void turnLeft();
     void turnRight();
+
+    ICar addCar();
+    int removeCar();
 }

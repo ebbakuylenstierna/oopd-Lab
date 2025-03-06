@@ -1,5 +1,7 @@
 package lab.graphics;
 
+import lab.car.ICar;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -37,6 +39,9 @@ public class CarWindow extends JFrame implements CarFrame {
     JButton turnLeftButton = new JButton("Turn left");
     JButton turnRightButton = new JButton("Turn right");
 
+    JButton addCarButton = new JButton("Add car");
+    JButton removeCarButton = new JButton("Remove car");
+
     // Constructor
     public CarWindow(String framename) {
         initComponents(framename);
@@ -50,7 +55,6 @@ public class CarWindow extends JFrame implements CarFrame {
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
         this.add(drawPanel);
-
 
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(0, //initial value
@@ -67,18 +71,20 @@ public class CarWindow extends JFrame implements CarFrame {
 
         this.add(gasPanel);
 
-        controlPanel.setLayout(new GridLayout(2, 4));
+        controlPanel.setLayout(new GridLayout(2, 6));
 
-        controlPanel.add(gasButton, 0);
-        controlPanel.add(turboOnButton, 1);
-        controlPanel.add(liftBedButton, 2);
-        controlPanel.add(startButton, 3);
-        controlPanel.add(stopButton, 4);
-        controlPanel.add(brakeButton, 5);
-        controlPanel.add(turboOffButton, 6);
-        controlPanel.add(lowerBedButton, 7);
-        controlPanel.add(turnLeftButton, 8);
-        controlPanel.add(turnRightButton, 9);
+        controlPanel.add(gasButton);
+        controlPanel.add(turboOnButton);
+        controlPanel.add(liftBedButton);
+        controlPanel.add(startButton);
+        controlPanel.add(stopButton);
+        controlPanel.add(addCarButton);
+        controlPanel.add(brakeButton);
+        controlPanel.add(turboOffButton);
+        controlPanel.add(lowerBedButton);
+        controlPanel.add(turnLeftButton);
+        controlPanel.add(turnRightButton);
+        controlPanel.add(removeCarButton);
         controlPanel.setPreferredSize(new Dimension(5 * X / 6 - 13, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
@@ -115,10 +121,31 @@ public class CarWindow extends JFrame implements CarFrame {
         stopButton.addActionListener(_ -> model.stopAll());
         turnLeftButton.addActionListener(_ -> model.turnLeft());
         turnRightButton.addActionListener(_ -> model.turnRight());
+
+        addCarButton.addActionListener(_ -> {
+            ICar car = model.addCar();
+            if (car == null) return;
+            addCar(car);
+        });
+        removeCarButton.addActionListener(_ -> {
+            int index = model.removeCar();
+            if (index == -1) return;
+            removeCar(index);
+        });
     }
 
     @Override
     public void updateModel(CarModel model) {
         drawPanel.updateModel(model);
+    }
+
+    @Override
+    public void addCar(ICar car) {
+        drawPanel.addCar(car);
+    }
+
+    @Override
+    public void removeCar(int index) {
+        drawPanel.removeCar(index);
     }
 }

@@ -25,9 +25,10 @@ public class DemoModel implements CarModel {
     double yMin = 0;
     double yMax;
 
-    public DemoModel(double width, double height) {
-        workshop = new Volvo240Mechanic(new Position(300, 300, Rotation.SOUTH));
+    int maxCars;
 
+    public DemoModel(double width, double height, int maxCars) {
+        workshop = new Volvo240Mechanic(new Position(300, 300, Rotation.SOUTH));
 
         cars.add(new Volvo240(0, 0));
         cars.add(new Saab95(0, 100));
@@ -35,6 +36,12 @@ public class DemoModel implements CarModel {
 
         xMax = width;
         yMax = height;
+
+        this.maxCars = maxCars;
+    }
+
+    public DemoModel(double width, double height) {
+        this(width, height, 10);
     }
 
     public void update() {
@@ -176,5 +183,33 @@ public class DemoModel implements CarModel {
             } catch (IllegalStateException _) {
             }
         }
+    }
+
+    @Override
+    public ICar addCar() {
+        if (cars.size() >= maxCars) return null;
+
+        double x = 0;
+        double y = (100 * cars.size()) % (yMax - yMin) - yMin;
+
+        int model = (int)(Math.random() * 3);
+        ICar car = switch (model) {
+            case 0 -> new Volvo240(x, y);
+            case 1 -> new Saab95(x, y);
+            case 2 -> new Scania(x, y);
+            default -> throw new IllegalStateException("Unexpected value: " + model);
+        };
+
+        cars.add(car);
+        return car;
+    }
+
+    @Override
+    public int removeCar() {
+        if (cars.isEmpty()) return -1;
+
+        int index = (int)(Math.random() * cars.size());
+        cars.remove(index);
+        return index;
     }
 }
