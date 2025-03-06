@@ -186,6 +186,7 @@ TransportableCar     -[#595959,dashed]->  Transporter
 CarModel             -[#595959,dashed]->  ICar
 CarModel             -[#595959,dashed]->  CarMechanic
 CarWindow            -[#008200,dashed]-^   CarFrame
+CarFrame            -[#595959,dashed]->   CarModel
 CarFrame             -[#000082,plain]-^   CarView
 DrawPanel            -[#008200,dashed]-^   CarView
 DemoModel            -[#008200,dashed]-^   CarModel
