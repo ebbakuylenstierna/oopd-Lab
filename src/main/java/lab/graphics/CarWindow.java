@@ -1,7 +1,5 @@
 package lab.graphics;
 
-import lab.car.TransportableCar;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,13 +10,11 @@ import java.awt.*;
  * each of it's components.
  **/
 
-public class CarWindow<T extends TransportableCar> extends JFrame implements CarView<T> {
+public class CarWindow extends JFrame implements CarView {
     public static final int X = 800;
     public static final int Y = 800;
 
     // The controller member
-    CarController carC;
-
     DrawPanel drawPanel = new DrawPanel(X, Y - 240);
 
     JPanel controlPanel = new JPanel();
@@ -42,8 +38,7 @@ public class CarWindow<T extends TransportableCar> extends JFrame implements Car
     JButton turnRightButton = new JButton("Turn right");
 
     // Constructor
-    public CarWindow(String framename, CarController cc) {
-        this.carC = cc;
+    public CarWindow(String framename) {
         initComponents(framename);
     }
 
@@ -108,7 +103,7 @@ public class CarWindow<T extends TransportableCar> extends JFrame implements Car
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void addModelObservers(CarModel<T> model) {
+    public void addModelObservers(CarModel model) {
         gasButton.addActionListener(_ -> model.gas(gasAmount));
         brakeButton.addActionListener(_ -> model.brake(gasAmount));
         turboOnButton.addActionListener(_ -> model.turboOn());
@@ -122,7 +117,7 @@ public class CarWindow<T extends TransportableCar> extends JFrame implements Car
     }
 
     @Override
-    public void updateModel(CarModel<T> model) {
+    public void updateModel(CarModel model) {
         drawPanel.updateModel(model);
     }
 }

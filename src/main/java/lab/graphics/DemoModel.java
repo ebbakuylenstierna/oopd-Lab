@@ -13,8 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lab.car.mechanic.Volvo240Mechanic;
+import lab.ramp.Ramp;
 
-public class DemoModel implements CarModel<Volvo240> {
+public class DemoModel implements CarModel {
     private final List<ICar> cars = new ArrayList<>();
 
     private final CarMechanic<Volvo240> workshop;
