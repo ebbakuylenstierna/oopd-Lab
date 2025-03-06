@@ -66,7 +66,11 @@ public class DemoModel implements CarModel {
 
 
     private void flipIfNearWall(ICar car) {
-        if (car.getX() < xMin || car.getX() > xMax || car.getY() < yMin || car.getY() > yMax) {
+        if ((car.getX() < xMin && car.getRotation() == Rotation.WEST) //
+                || (car.getX() > xMax && car.getRotation() == Rotation.EAST) //
+                || (car.getY() < yMin && car.getRotation() == Rotation.NORTH) //
+                || (car.getY() > yMax && car.getRotation() == Rotation.SOUTH)) //
+        {
             car.turnRight();
             car.turnRight();
         }
@@ -192,7 +196,7 @@ public class DemoModel implements CarModel {
         double x = 0;
         double y = (100 * cars.size()) % (yMax - yMin) - yMin;
 
-        int model = (int)(Math.random() * 3);
+        int model = (int) (Math.random() * 3);
         ICar car = switch (model) {
             case 0 -> new Volvo240(x, y);
             case 1 -> new Saab95(x, y);
@@ -208,7 +212,7 @@ public class DemoModel implements CarModel {
     public int removeCar() {
         if (cars.isEmpty()) return -1;
 
-        int index = (int)(Math.random() * cars.size());
+        int index = (int) (Math.random() * cars.size());
         cars.remove(index);
         return index;
     }
